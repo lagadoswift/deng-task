@@ -6,3 +6,5 @@ Google drive link: https://drive.google.com/drive/folders/1U4CEg9VGIRylRaEeVHwqn
 The author claims that this dataset can be used to create an optimization model for the catalytic cracking unit.
 
 Downside: since it's a dataset from Kaggle, it allegedly lacks noise and outliers, although it does have operational disturbances.
+
+![Screenshot of data loading](https://github.com/lagadoswift/deng-task/blob/main/data_loader.py/images/screen.png)
