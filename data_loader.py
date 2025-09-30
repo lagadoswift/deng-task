@@ -22,6 +22,11 @@ df.to_csv(files_dir + "dataset.csv", index=False)
 
 # Task №3
 
+print(df.dtypes)
+
+df['Feed_Change_Event']=df['Feed_Change_Event'].astype(bool)
+df['Catalyst_Replacement']=df['Catalyst_Replacement'].astype(bool)
+
 print(df.describe())
 print(df.dtypes)
 

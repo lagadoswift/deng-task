@@ -8,3 +8,6 @@ The author claims that this dataset can be used to create an optimization model 
 Downside: since it's a dataset from Kaggle, it allegedly lacks noise and outliers, although it does have operational disturbances.
 
 ![Screenshot of data loading](https://github.com/lagadoswift/deng-task/blob/main/images/screen.png)
+
+
+![Screenshot of data types](https://github.com/lagadoswift/deng-task/blob/main/images/task_3.png)
