@@ -1,4 +1,3 @@
-
 import requests
 import statistics, re
 import json
@@ -11,6 +10,7 @@ response = requests.get(url)
 content = response.json()
 
 print(content)
+
 
 def get_weight(arg):
     weight = list()
@@ -57,5 +57,5 @@ files_dir = script_dir + "\\data\\"
 if not os.path.exists(files_dir):
     os.makedirs(files_dir)
 
-with open(files_dir + "cats.csv", 'w', newline='') as file:
-    json.dump(content,file, indent=4)
+with open(files_dir + "cats.csv", "w", newline="") as file:
+    json.dump(content, file, indent=4)

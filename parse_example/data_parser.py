@@ -28,8 +28,8 @@ soup = BeautifulSoup(content, "html.parser")
 
 table = soup.find_all("tr")
 
-#print(soup)
-#print(table)
+# print(soup)
+# print(table)
 
 # print(tables[2])
 
@@ -47,6 +47,7 @@ cont = BeautifulSoup(str(table[3]), "html.parser")
 # 6 - Vice president
 
 # The table has a very complex structure... it's hard to scrape
+
 
 def iterate_table(table):
     lst = list()
@@ -73,19 +74,19 @@ def get_values(cont):
     for val in tds:
         print(list(val.strings))
         strings.append(list(val.strings))
-#        print(strings)
+    #        print(strings)
     dct = dict()
 
-    bad_substrings=("\n","[","]",*letters)
+    bad_substrings = ("\n", "[", "]", *letters)
     dct["Name"] = strings[1][0]
     dct["Dates of birth and death"] = reduce(lambda x, y: x + y, strings[1][1])
     #    dct['Term'] = reduce(lambda x,y : x + y , strings[2][0:3])
     dct["Term"] = get_terms(strings[2])
-    dct["Party"] = reduce(lambda x, y: x + " " + y,
-                          filter(lambda x: x not in bad_substrings,strings[4])
-                          )
+    dct["Party"] = reduce(
+        lambda x, y: x + " " + y, filter(lambda x: x not in bad_substrings, strings[4])
+    )
     dct["Election"] = reduce(
-        lambda x, y: x + " ; " + y, filter(lambda x: x!="\n", strings[5])
+        lambda x, y: x + " ; " + y, filter(lambda x: x != "\n", strings[5])
     )
     dct["Vice President"] = reduce(
         lambda x, y: x + "; " + y,
@@ -93,6 +94,7 @@ def get_values(cont):
     )
 
     return dct
+
 
 results = iterate_table(table)
 
