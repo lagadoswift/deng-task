@@ -3,13 +3,12 @@ import statistics, re
 import json
 import os
 
-url = "https://api.thecatapi.com/v1/breeds"
 
-response = requests.get(url)
-
-content = response.json()
-
-print(content)
+def get_data(url):
+    response = requests.get(url)
+    content = response.json()
+    print(content)
+    return content
 
 
 def get_weight(arg):
@@ -46,16 +45,25 @@ def get_lifespans(arg):
     return minim, maxim, mean, median, deviation
 
 
-print("CATS WEIGHT DATA (kg) \n" "MINIMUM, MAXIMUM, MEAN, MEDIAN, DEVIATION")
-print(get_weight(content))
-print("CATS LIFESPAN DATA (years) \n" "MINIMUM, MAXIMUM, MEAN, MEDIAN, DEVIATION")
-print(get_lifespans(content))
+def main():
+    url = "https://api.thecatapi.com/v1/breeds"
 
-script_dir = str(os.path.dirname(__file__))
-files_dir = script_dir + "\\data\\"
+    content = get_data(url)
 
-if not os.path.exists(files_dir):
-    os.makedirs(files_dir)
+    print("CATS WEIGHT DATA (kg) \n" "MINIMUM, MAXIMUM, MEAN, MEDIAN, DEVIATION")
+    print(get_weight(content))
+    print("CATS LIFESPAN DATA (years) \n" "MINIMUM, MAXIMUM, MEAN, MEDIAN, DEVIATION")
+    print(get_lifespans(content))
 
-with open(files_dir + "cats.csv", "w", newline="") as file:
-    json.dump(content, file, indent=4)
+    script_dir = str(os.path.dirname(__file__))
+    files_dir = script_dir + "\\data\\"
+
+    if not os.path.exists(files_dir):
+        os.makedirs(files_dir)
+
+    with open(files_dir + "cats.csv", "w", newline="") as file:
+        json.dump(content, file, indent=4)
+
+
+if __name__ == "__main__":
+    main()

@@ -6,34 +6,35 @@ from functools import reduce
 import pandas as pd
 import os
 
-# Getting the content
-url = "https://en.wikipedia.org/w/index.php?title=List_of_presidents_of_the_United_States&oldid=1312863317"
 
-# the Wikimedia policy requires setting up a user agent
-# https://wikitech.wikimedia.org/wiki/Robot_policy
-# https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
-# https://phabricator.wikimedia.org/T400119
+def get_data(url):
+    # the Wikimedia policy requires setting up a user agent
+    # https://wikitech.wikimedia.org/wiki/Robot_policy
+    # https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
+    # https://phabricator.wikimedia.org/T400119
 
-headers = {
-    "User-Agent": "Beautiful Soup Scraper 30.09.2025 ; kirillovdm2002@gmail.com)"
-}
+    headers = {
+        "User-Agent": "Beautiful Soup Scraper 30.09.2025 ; kirillovdm2002@gmail.com)"
+    }
 
-response = requests.get(url, headers=headers)
-content = response.content
-soup = BeautifulSoup(content, "html.parser")
-# print(soup.title)
-# print(soup.title.get_text())
-# print(soup.body)
-# print(response.status_code)
+    response = requests.get(url, headers=headers)
+    content = response.content
+    soup = BeautifulSoup(content, "html.parser")
+    # print(soup.title)
+    # print(soup.title.get_text())
+    # print(soup.body)
+    # print(response.status_code)
 
-table = soup.find_all("tr")
+    table = soup.find_all("tr")
 
-# print(soup)
-# print(table)
+    # print(soup)
+    # print(table)
 
-# print(tables[2])
+    # print(tables[2])
 
-cont = BeautifulSoup(str(table[3]), "html.parser")
+    cont = BeautifulSoup(str(table[3]), "html.parser")
+    return table
+
 
 # Defining the functions
 
@@ -96,22 +97,30 @@ def get_values(cont):
     return dct
 
 
-results = iterate_table(table)
+def main():
+    # Getting the content
+    url = "https://en.wikipedia.org/w/index.php?title=List_of_presidents_of_the_United_States&oldid=1312863317"
+    table = get_data(url)
 
-print(results)
+    results = iterate_table(table)
 
-# "DATE OF BIRTH AND DEATH" FOR LIVING PEOPLE IS STILL SCRAPED INCORRECTLY DUE TO COMPLEXITIES WITH FORMATTING
+    print(results)
 
-df = pd.DataFrame(data=results)
+    # "DATE OF BIRTH AND DEATH" FOR LIVING PEOPLE IS STILL SCRAPED INCORRECTLY DUE TO COMPLEXITIES WITH FORMATTING
 
-print(df)
+    df = pd.DataFrame(data=results)
+
+    print(df)
+
+    script_dir = str(os.path.dirname(__file__))
+    files_dir = script_dir + "\\data\\"
+
+    if not os.path.exists(files_dir):
+        os.makedirs(files_dir)
+
+    # Saving to parquet doesn't work (allegedly due to bad scraping of birth-death)
+    df.to_csv(files_dir + "dataset.csv", index=False)
 
 
-script_dir = str(os.path.dirname(__file__))
-files_dir = script_dir + "\\data\\"
-
-if not os.path.exists(files_dir):
-    os.makedirs(files_dir)
-
-# Saving to parquet doesn't work (allegedly due to bad scraping of birth-death)
-df.to_csv(files_dir + "dataset.csv", index=False)
+if __name__ == "__main__":
+    main()
