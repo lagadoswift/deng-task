@@ -22,18 +22,13 @@ def main():
 
     engine = create_engine(db_link)
 
-    inspector = inspect(engine)
+    limited_df = df.head(100)
 
-    if inspector.has_table("kirillov"):
-        print("Table already exists")
-    else:
-        limited_df = df.head(100)
-
-        limited_df.to_sql(
-            name="kirillov",
-            con=engine,
-            if_exists="fail",
-            index=False,
+    limited_df.to_sql(
+        name="kirillov",
+        con=engine,
+        if_exists="replace",
+        index=False,
         )
 
     engine.dispose()

@@ -27,6 +27,7 @@ def main():
 
     df["Feed_Change_Event"] = df["Feed_Change_Event"].astype(bool)
     df["Catalyst_Replacement"] = df["Catalyst_Replacement"].astype(bool)
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
 
     print(df.describe())
     print(df.dtypes)
