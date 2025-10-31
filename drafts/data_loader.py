@@ -3,6 +3,7 @@
 import pandas as pd
 import os
 
+
 def main():
     url = "https://drive.google.com/uc?id=1dTauyYXM4FfCyeFgc6jAS9XtkjTdfsVt"
 
@@ -27,7 +28,7 @@ def main():
 
     df["Feed_Change_Event"] = df["Feed_Change_Event"].astype(bool)
     df["Catalyst_Replacement"] = df["Catalyst_Replacement"].astype(bool)
-    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+    df["Timestamp"] = pd.to_datetime(df["Timestamp"])
 
     print(df.describe())
     print(df.dtypes)
@@ -37,6 +38,7 @@ def main():
     # saving to Parquet
 
     df.to_parquet(files_dir + "dataset.parquet", index=False)
+
 
 if __name__ == "__main__":
     main()

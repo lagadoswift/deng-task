@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
 import pandas as pd
@@ -29,7 +29,7 @@ def main():
         con=engine,
         if_exists="replace",
         index=False,
-        )
+    )
 
     engine.dispose()
 
