@@ -77,6 +77,7 @@ deng_task/
 │── notebooks/
 │   └── eda.ipynb # Jupyter notebook where the data is being explored
 │
+├── __init__.py
 ├── .gitignore
 ├── extract.py # essential data extraction script
 ├── load.py # essential data loading script
