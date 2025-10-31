@@ -114,7 +114,7 @@ Once all packages are installed, you should create an .end file with at least th
 
 To launch the ETL process type in the CMD:
 
-'python main.py'
+`python main.py`
 
 ## EDA
 
