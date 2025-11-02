@@ -71,20 +71,22 @@ deng_task/
 │   ├── data_loader.py # early draft of the data extraction script
 │   └── write_to_db.py # early draft of the load to DB script
 │
+│── etl/
+│   ├── __init__.py
+│   ├── extract.py # essential data extraction script
+│   ├── load.py # essential data loading script
+│   ├── main.py # essential script to launch the ETL process
+│   └── transform.py # essential data transformation script
+|
 │── images/
 │   └── FCCdiagram.png
 │
 │── notebooks/
 │   └── eda.ipynb # Jupyter notebook where the data is being explored
 │
-├── __init__.py
 ├── .gitignore
-├── extract.py # essential data extraction script
-├── load.py # essential data loading script
-├── main.py # essential script to launch the ETL process
 ├── readme.md # this file
-├── requirements.txt # requirements for the project
-└── tranform.py # essential data transformation script
+└── requirements.txt # requirements for the project
 ```
 
 ## ETL components
@@ -115,7 +117,7 @@ Once all packages are installed, you should create an .env file with at least th
 
 To launch the ETL process type in the cmd:
 
-`python main.py`
+`python -m etl.main`
 
 ## EDA
 
