@@ -1,14 +1,13 @@
 import os
+import pathlib
 import pandas as pd
 from dotenv import load_dotenv
 from dataclasses import dataclass
-from extract import *
-from transform import *
-from load import *
+from etl.extract import *
+from etl.transform import *
+from etl.load import *
 
-script_dir = str(os.path.dirname(__file__))
-data_dir = script_dir + "\\data\\"
-
+project_root = str(pathlib.Path.cwd())
 
 # some of these defaults may be excessive, actually
 @dataclass
@@ -19,14 +18,14 @@ class Config:
     DB_PASSWORD: str
     DB_NAME: str
     DB_PORT: int = 5432
-    PARQUET_DIR: str = data_dir + "processed\\"  # note: all folder names must end in \\
-    INPUT_FILE: str = data_dir + "raw\\data.csv"
-    OUTPUT_DIR: str = data_dir + "raw\\"
+    PARQUET_DIR: str = project_root + "\\data\\processed\\"  # note: all folder names must end in \\
+    INPUT_FILE: str = project_root + "\\data\\raw\\data.csv"
+    OUTPUT_DIR: str = project_root + "\\data\\raw\\"
 
 
 def get_env_conf() -> Config:
     load_dotenv()
-
+ 
     return Config(
         DB_TABLE_NAME=os.getenv("DB_TABLE_NAME", "etl_data"),
         DB_URL=os.getenv("DB_URL", "localhost"),
@@ -35,9 +34,9 @@ def get_env_conf() -> Config:
         DB_PASSWORD=os.getenv("DB_PASSWORD", "password"),
         DB_NAME=os.getenv("DB_NAME", "database"),
         INPUT_FILE=os.getenv(
-            "INPUT_FILE", data_dir + "raw\\data.csv"
+            "INPUT_FILE", project_root + "\\data\\raw\\data.csv"
         ),  # in my .env INPUT_FILE is a Google Drive link
-        OUTPUT_DIR=os.getenv("OUTPUT_DIR", data_dir + "raw\\"),
+        OUTPUT_DIR=os.getenv("OUTPUT_DIR", project_root + "\\data\\raw\\"),
     )
 
 
