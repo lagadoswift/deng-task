@@ -31,9 +31,9 @@ The following table provides short description of the columns in the dataset.
 | Feedstock_Quality_Index | Quality of the feedstock |
 | Setpoint_Reactor_Temp | Target temperature for the PID controller |
 | Setpoint_Regenerator_Temp | Target temperature for the PID controller |
-| PID_Kp | Coeff of the PID controller |
-| PID_Ki | CCoeff of the PID controller |
-| PID_Kd | Coeff of the PID controller |
+| PID_Kp | Coeff. of the PID controller |
+| PID_Ki | Coeff. of the PID controller |
+| PID_Kd | Coeff. of the PID controller |
 | Fuzzy_Adjustment_Factor | Parameter for the PID controller |
 | Product_Yield | Product flow |
 | Conversion_Rate | % of the chemically changed feed |
@@ -100,11 +100,11 @@ Requires Python 3.13.5 or newer.
 
 Set up the Python virtual environment.
 
-To install the required packages use pip. Open the project directory and type in the Windows CMD:
+To install the required packages use pip. Open the project directory and type in the Windows cmd:
 
 `py -m pip install -r requirements.txt`
 
-Once all packages are installed, you should create an .end file with at least the following environment variables:
+Once all packages are installed, you should create an .env file with at least the following environment variables:
 
 - INPUT_FILE - URL or disk destination of the file
 - DB_USER - username to access the SQL database
@@ -113,7 +113,7 @@ Once all packages are installed, you should create an .end file with at least th
 - DB_NAME - name of the SQL DB
 - DB_TABLE_NAME - name of the table to save the data into
 
-To launch the ETL process type in the CMD:
+To launch the ETL process type in the cmd:
 
 `python main.py`
 
